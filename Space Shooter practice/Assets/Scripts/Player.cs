@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     //this variable contains the speed of the player
     [SerializeField]
     private float _speed = 3.5f;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +20,58 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CalculateMovement();
+
+    }
+
+    void CalculateMovement()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
         //accessing the transform component Translate(Vector3(1,0,0))
         //Vector3(1,0,0) 1*fps 0*fps 0*fps
         //Vector391,0,0) 1*1sec 0*sec 0*sec 0*1sec 1m/s
         //Vector3(1,0,0) 1 * 5 * Time.deltaTime 5m/s
         //Vector3(1,0,0) 1 * speed * Time.deltaTime 3.5m/s
-        transform.Translate(Vector3.right * _speed * Time.deltaTime);
+        //Vector3(1,0,0) 1 * horizontalInput(-1 - 1) * _speed * Time.deltaTime
+        //transform.Translate(Vector3.right *horizontalInput * _speed * Time.deltaTime);
+        //Vector3(0,1,0) 1y * verticalInput(-1 - 1) * _speed * time.deltaTime
+        //transform.Translate(Vector3.up * verticalInput * _speed * Time.deltaTime);
+        //Vector3(horizontalInput,verticalInput,0) * _speed * Time.deltaTime;
+        //Vector3(1,1,0) * _speed * Time.deltaTime;
+        //transform.Translate(new Vector3(horizontalInput,verticalInput,0) * _speed * Time.deltaTime);
+        Vector3 direction = new Vector3(horizontalInput,verticalInput,0);
+        //(checking if hoizontal or vertical) * _speed * Time.deltaTime;
+        transform.Translate(direction * _speed * Time.deltaTime);
+
+        // if(transform.position.y >=0)
+        // {
+        //     //stop the player from going higher in the screen
+        //     transform.position = new Vector3(transform.position.x,0,0);
+        // }
+        // //if the player's y position is smaller or equal to -3.8f
+        // else if(transform.position.y <= -3.8f)
+        // {
+        //     //stops the player from going lower than -3.8f
+        //     transform.position = new Vector3(transform.position.x,-3.8f,0);
+        // }
+        //Vector3(transform.position.xMathf,Clamp(),0)
+        transform.position = new Vector3(transform.position.x,Mathf.Clamp(transform.position.y,-3.8f,0),0);
+
+
+
+        //check if the player went past 11.3f on the axis (right)
+        if(transform.position.x > 11.3f)
+        {
+            //check if the player went past -11.3f on the axis
+            transform.position = new Vector3(-11.3f,transform.position.y,0);
+        }
+
+            //check if the player went past -11.3f on the axis (left)
+            else if(transform.position.x < -11.3f)
+        {
+            //check if the player went past -11.3f on the axis
+            transform.position = new Vector3(11.3f,transform.position.y,0);
+        }
     }
 }
