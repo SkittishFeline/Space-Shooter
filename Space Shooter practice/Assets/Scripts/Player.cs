@@ -7,6 +7,14 @@ public class Player : MonoBehaviour
     //this variable contains the speed of the player
     [SerializeField]
     private float _speed = 3.5f;
+    [SerializeField]
+
+    private GameObject _laser;
+    [SerializeField]
+
+    private float _fireRate = 0.5f;
+
+    private float _canFire = 0.5f;
     
 
     // Start is called before the first frame update
@@ -21,6 +29,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
+
+        //Time.time + 0_canFire = -1 (When the game starts)
+        //Time.time = 1 _canFire + -1 (Right after shooting laser)
+        //Time.time = 0.5 _canFire = 0.5
+        if(Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        {
+            FireLaser();
+        }
 
     }
 
@@ -73,5 +89,13 @@ public class Player : MonoBehaviour
             //check if the player went past -11.3f on the axis
             transform.position = new Vector3(11.3f,transform.position.y,0);
         }
+    }
+
+    void FireLaser()
+    {
+        Debug.Log("Space is pressed");
+            _canFire = Time.time + _fireRate;
+            //create a clone on the player's position using the default rotation
+            Instantiate(_laser,transform.position + new Vector3(0,0.8f,0),Quaternion.identity);
     }
 }
