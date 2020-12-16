@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.5f;
 
     private float _canFire = 0.5f;
+    [SerializeField]
+
+    private int _lives = 3;
     
 
     // Start is called before the first frame update
@@ -91,6 +94,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    
     void FireLaser()
     {
         Debug.Log("Space is pressed");
@@ -98,4 +102,16 @@ public class Player : MonoBehaviour
             //create a clone on the player's position using the default rotation
             Instantiate(_laser,transform.position + new Vector3(0,0.8f,0),Quaternion.identity);
     }
+
+    public void Damage()
+        {
+            //lives = lives -1
+            //_lives--;
+            _lives-= 1;
+
+            if(_lives < 1)
+            {
+                Destroy(this.gameObject);
+            }
+        }
 }
