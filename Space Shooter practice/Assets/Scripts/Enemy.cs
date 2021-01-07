@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
         //change the position to teleport from the top of the sceen from 7.5f on the y axis
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Hit: " + other.transform.name);
         if(other.tag == "Laser")
