@@ -7,12 +7,15 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject _enemyPrefab;
     [SerializeField]
+    private GameObject _tripleShotPrefab;
+    [SerializeField]
     private GameObject _enemyContainer;
     private bool _stopSpawning = false;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnRoutine());
+        StartCoroutine(SpawnPowerupRoutine());
     }
 
     // Update is called once per frame
@@ -36,6 +39,17 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(5f);
         }
 
+    }
+
+    IEnumerator SpawnPowerupRoutine()
+    {
+        while(_stopSpawning == false)
+        {
+            Vector3 posToSpawn = new Vector3(Random.Range(-9.2f,9.2f),7f,0);
+            Instantiate(_tripleShotPrefab,posToSpawn,Quaternion.identity);
+            //wait a random number of seconds within the range of 6-9 secs before spawning another one
+            yield return new WaitForSeconds(Random.Range(6,10));
+        }
     }
 
     public void OnPlayerDeath()

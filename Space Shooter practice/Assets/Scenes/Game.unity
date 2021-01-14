@@ -180,8 +180,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _laser: {fileID: 1160403885090835744, guid: b32eb93f521169147b30432306beaaa3, type: 3}
+  _tripleShotPrefab: {fileID: 245736388742165556, guid: 0d6d8ffab5932094c8916bee83e851eb,
+    type: 3}
   _fireRate: 0.5
   _lives: 3
+  _isTripleShotActive: 0
 --- !u!212 &187100782
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -545,7 +548,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5b17a0088dcdf924fa92da5af1e1be07, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -659,6 +662,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 1872102491898528642, guid: cfd830d07ce74614f81278c13e22f853,
+    type: 3}
+  _tripleShotPrefab: {fileID: 4064855969404277918, guid: 4eaeb2e25b3583845bdf0ea4ec2010d7,
     type: 3}
   _enemyContainer: {fileID: 532684428}
 --- !u!4 &2074711681
