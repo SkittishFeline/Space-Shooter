@@ -6,6 +6,12 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 3f;
+    //ID for powerups
+    //0 = Triple shot
+    //1 = Speed
+    //2 = Shield
+    [SerializeField]
+    private int _powerupID;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +37,25 @@ public class PowerUp : MonoBehaviour
                 //if the player is found
                 if(player != null)
                 {
-                    player.ActivateTripleShot();
+                    //player.ActivateTripleShot();
+
+                    switch(_powerupID)
+                    {
+                        case 0:
+                            player.ActivateTripleShot();
+                            break;
+                        case 1:
+                            player.SpeedBoostActive();
+                            Debug.Log("Collected Speed Boost");
+                            break;
+                        case 2:
+                            player.ActiveateShield();
+                            Debug.Log("Shields Collected");
+                            break;
+                        default:
+                            Debug.Log("Default Value");
+                            break;
+                    }
                 }
                 //then destroy the powerup
                 Destroy(this.gameObject);
