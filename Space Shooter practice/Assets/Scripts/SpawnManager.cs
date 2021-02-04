@@ -20,6 +20,11 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnPowerupRoutine());
     }
 
+    public void StartSpawning()
+    {
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -28,6 +33,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
+        yield return new WaitForSeconds(3f);
         //spawn enemies every 5 seconds
         //spawn continously
             while(_stopSpawning == false)
@@ -45,6 +51,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPowerupRoutine()
     {
+        yield return new WaitForSeconds(3f);
         while(_stopSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-9.2f,9.2f),7f,0);
